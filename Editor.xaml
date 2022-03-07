@@ -1,0 +1,17 @@
+﻿<Window x:Class="Bazzze.Editor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Bazzze"
+        mc:Ignorable="d"
+        Title="Editor" Height="450" Width="800" FontSize="24">
+    <UniformGrid Columns="2">
+        <Label>Ime:</Label>
+        <TextBox Text="{Binding Path=Ime, UpdateSourceTrigger=Explicit}" />
+        <Label>Prezime:</Label>
+        <TextBox Text="{Binding Path=Prezime, UpdateSourceTrigger=Explicit}" />
+        <Button Click="Otkazi">Otkazivaj</Button>
+        <Button Click="OK">Okejisi</Button>
+    </UniformGrid>
+</Window>
