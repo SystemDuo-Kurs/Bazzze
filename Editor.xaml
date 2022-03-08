@@ -11,6 +11,12 @@
         <TextBox Text="{Binding Path=Ime, UpdateSourceTrigger=Explicit}" />
         <Label>Prezime:</Label>
         <TextBox Text="{Binding Path=Prezime, UpdateSourceTrigger=Explicit}" />
+        <Label>Mail:</Label>
+        <TextBox Text="{Binding Path=Email, UpdateSourceTrigger=Explicit}" />
+        <Label>Grad:</Label>
+        <TextBox Text="{Binding Path=Adresa.Grad, UpdateSourceTrigger=Explicit}" />
+        <Label>Postanski:</Label>
+        <TextBox Text="{Binding Path=Adresa.PO, UpdateSourceTrigger=Explicit}" />
         <Button Click="Otkazi">Otkazivaj</Button>
         <Button Click="OK">Okejisi</Button>
     </UniformGrid>

@@ -10,6 +10,8 @@ namespace Bazzze
     internal class Db : DbContext
     {
         public DbSet<Osoba> Osobas { get; set; }
+        public DbSet<Adresa> Adresses { get; set; }
+        public DbSet<Zanimanje> Zanimanje { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -24,6 +26,27 @@ namespace Bazzze
                 .ValueGeneratedOnAdd();
 
             modelBuilder.Entity<Osoba>().HasKey("Id");
+
+            modelBuilder.Entity<Adresa>()
+                .Property<int>("Id")
+                .HasColumnType("int")
+                .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<Adresa>().HasKey("Id");
+
+            modelBuilder.Entity<Zanimanje>()
+                            .Property<int>("Id")
+                            .HasColumnType("int")
+                            .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<Zanimanje>().HasKey("Id");
+
+            modelBuilder.Entity<Osoba>().HasKey("Id"); modelBuilder.Entity<Osoba>().HasOne(o => o.Adresa)
+                .WithOne(a => a.Osoba)
+                .HasForeignKey<Osoba>("FK_Adresa");
+
+            modelBuilder.Entity<Osoba>().HasMany(o => o.Zanimanja)
+                .WithMany(z => z.Osobe);
         }
     }
 }

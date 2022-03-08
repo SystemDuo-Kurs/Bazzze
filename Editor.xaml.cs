@@ -29,8 +29,10 @@ namespace Bazzze
         private void OK(object sender, RoutedEventArgs e)
         {
             DialogResult = true;
-            BindingGroup.UpdateSources();
-            Close();
+            if (BindingGroup.UpdateSources())
+            {
+                Close();
+            }
         }
 
         private void Otkazi(object sender, RoutedEventArgs e)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,7 +27,10 @@ namespace Bazzze
         {
             InitializeComponent();
             dg.ItemsSource = _db.Osobas.Local.ToObservableCollection();
-            _db.Osobas.ToList();
+            _db.Osobas.Include(o => o.Adresa).ToList();
+            listaZanimanja.ItemsSource = _db.Zanimanje.Local.ToObservableCollection();
+            listaZanimanja.DisplayMemberPath = "Naziv";
+            _db.Zanimanje.ToList();
         }
 
         private void Dodaj(object sender, RoutedEventArgs e)
@@ -37,6 +41,18 @@ namespace Bazzze
             if (ed.DialogResult.HasValue && ed.DialogResult.Value)
             {
                 _db.Add(ed.DataContext as Osoba);
+                _db.SaveChanges();
+            }
+        }
+
+        private void Izmena(object sender, RoutedEventArgs e)
+        {
+            Editor ed = new();
+            ed.Owner = this;
+            ed.DataContext = dg.SelectedItem;
+            ed.ShowDialog();
+            if (ed.DialogResult.HasValue && ed.DialogResult.Value)
+            {
                 _db.SaveChanges();
             }
         }
