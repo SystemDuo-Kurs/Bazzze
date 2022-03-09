@@ -11,7 +11,7 @@ namespace Bazzze
     {
         public DbSet<Osoba> Osobas { get; set; }
         public DbSet<Adresa> Adresses { get; set; }
-        public DbSet<Zanimanje> Zanimanje { get; set; }
+        public DbSet<Zanimanje> Zanimanja { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -20,28 +20,14 @@ namespace Bazzze
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Osoba>()
-                .Property<int>("Id")
-                .HasColumnType("int")
-                .ValueGeneratedOnAdd();
-
             modelBuilder.Entity<Osoba>().HasKey("Id");
-
-            modelBuilder.Entity<Adresa>()
-                .Property<int>("Id")
-                .HasColumnType("int")
-                .ValueGeneratedOnAdd();
 
             modelBuilder.Entity<Adresa>().HasKey("Id");
 
-            modelBuilder.Entity<Zanimanje>()
-                            .Property<int>("Id")
-                            .HasColumnType("int")
-                            .ValueGeneratedOnAdd();
-
             modelBuilder.Entity<Zanimanje>().HasKey("Id");
 
-            modelBuilder.Entity<Osoba>().HasKey("Id"); modelBuilder.Entity<Osoba>().HasOne(o => o.Adresa)
+            modelBuilder.Entity<Osoba>().HasKey("Id");
+            modelBuilder.Entity<Osoba>().HasOne(o => o.Adresa)
                 .WithOne(a => a.Osoba)
                 .HasForeignKey<Osoba>("FK_Adresa");
 

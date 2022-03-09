@@ -27,11 +27,27 @@
         <TabItem Header="Zanimanja">
             <DockPanel>
                 <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center">
-                    <Button Click="Dodaj">Dodaj</Button>
-                    <Button Click="Izmena">Izmeni</Button>
-                    <Button Click="Brisanje">Obrisi</Button>
+                    <Button Click="DodajZam">Dodaj</Button>
+                    <Button Click="IzmenaZam">Izmeni</Button>
+                    <Button Click="BrisanjeZam">Obrisi</Button>
                 </StackPanel>
                 <ListBox Name="listaZanimanja" />
+            </DockPanel>
+        </TabItem>
+        <TabItem Header="Zaposljavanje">
+            <UniformGrid Columns="3">
+                <ListBox Name="lbLevo" />
+                <StackPanel VerticalAlignment="Center">
+                    <Button Margin="0 25" Click="Zaposli">Dodaj</Button>
+                    <Button Margin="0 25" Click="Otposli">Makni</Button>
+                </StackPanel>
+                <ListBox Name="lbDesno" />
+            </UniformGrid>
+        </TabItem>
+        <TabItem Header="Uhljebi">
+            <DockPanel>
+                <ComboBox Name="cmbZam" DockPanel.Dock="Top" SelectionChanged="PromenaCmb" />
+                <ListBox Name="lbUhljebi" />
             </DockPanel>
         </TabItem>
     </TabControl>

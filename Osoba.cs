@@ -9,14 +9,19 @@ namespace Bazzze
 {
     public class Zanimanje
     {
+        public int Id { get; set; }
         public string Naziv { get; set; } = string.Empty;
         public List<Osoba> Osobe { get; set; } = new();
     }
 
     public class Osoba
     {
+        public int Id { get; set; }
         public string Ime { get; set; } = string.Empty;
         public string Prezime { get; set; } = string.Empty;
+
+        //get => $"{Ime} {Prezime}" isto kao get {return $"{Ime} {Prezime}";}
+        public string ImeIPrezime { get => $"{Ime} {Prezime}"; }
 
         public string Email { get; set; } = string.Empty;
 
@@ -26,6 +31,7 @@ namespace Bazzze
 
     public class Adresa
     {
+        public int Id { get; set; }
         public string Grad { get; set; } = string.Empty;
         public string PO { get; set; } = string.Empty;
         public string Ulica { get; set; } = string.Empty;
