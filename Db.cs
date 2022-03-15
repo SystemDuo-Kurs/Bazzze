@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Bazzze
 {
+    //Hhahahahah
     internal class Db : DbContext
     {
         public DbSet<Osoba> Osobas { get; set; }
