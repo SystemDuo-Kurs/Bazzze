@@ -23,9 +23,30 @@ namespace Bazzze
     {
         private Db _db = new();
 
+        private string _pretragaOsoba;
+
+        public string PretragaOsoba
+        {
+            get => _pretragaOsoba;
+            set
+            {
+                _pretragaOsoba = value;
+                lbLevo.ItemsSource = _db.Osobas.Where(osoba =>
+                    osoba.Ime.Contains(_pretragaOsoba) || osoba.Prezime.Contains(_pretragaOsoba))
+                    .ToList();
+            }
+        }
+
+        public string PretragaZanimanja
+        {
+            get; set;
+        }
+
         public MainWindow()
         {
             InitializeComponent();
+
+            DataContext = this;
 
             _db.Osobas.Include(o => o.Adresa).ToList();
             _db.Zanimanja.ToList();
@@ -35,7 +56,7 @@ namespace Bazzze
             listaZanimanja.ItemsSource = _db.Zanimanja.Local.ToObservableCollection();
             listaZanimanja.DisplayMemberPath = "Naziv";
 
-            lbLevo.ItemsSource = _db.Osobas.Local.ToObservableCollection();
+            lbLevo.ItemsSource = _db.Osobas.ToList();
             lbLevo.DisplayMemberPath = "ImeIPrezime";
             lbDesno.ItemsSource = _db.Zanimanja.Local.ToObservableCollection();
             lbDesno.DisplayMemberPath = "Naziv";
@@ -55,6 +76,7 @@ namespace Bazzze
             {
                 _db.Add(ed.DataContext as Osoba);
                 _db.SaveChanges();
+                lbLevo.ItemsSource = _db.Osobas.ToList();
             }
         }
 
@@ -67,6 +89,7 @@ namespace Bazzze
             if (ed.DialogResult.HasValue && ed.DialogResult.Value)
             {
                 _db.SaveChanges();
+                lbLevo.ItemsSource = _db.Osobas.ToList();
             }
         }
 
@@ -74,6 +97,7 @@ namespace Bazzze
         {
             _db.Remove(dg.SelectedItem as Osoba);
             _db.SaveChanges();
+            lbLevo.ItemsSource = _db.Osobas.ToList();
         }
 
         private void DodajZam(object sender, RoutedEventArgs e)
@@ -122,6 +146,16 @@ namespace Bazzze
 
         private void Otposli(object sender, RoutedEventArgs e)
         {
+            if (lbLevo.SelectedItem is null || lbDesno.SelectedItem is null)
+            {
+                MessageBox.Show("Joook");
+            }
+            else
+            {
+                (lbLevo.SelectedItem as Osoba).Zanimanja
+                    .Remove(lbDesno.SelectedItem as Zanimanje);
+                _db.SaveChanges();
+            }
         }
 
         private void PromenaCmb(object sender, SelectionChangedEventArgs e)

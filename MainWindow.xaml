@@ -36,12 +36,18 @@
         </TabItem>
         <TabItem Header="Zaposljavanje">
             <UniformGrid Columns="3">
-                <ListBox Name="lbLevo" />
+                <StackPanel>
+                    <TextBox Text="{Binding PretragaOsoba, UpdateSourceTrigger=PropertyChanged}" />
+                    <ListBox Name="lbLevo" />
+                </StackPanel>
                 <StackPanel VerticalAlignment="Center">
                     <Button Margin="0 25" Click="Zaposli">Dodaj</Button>
                     <Button Margin="0 25" Click="Otposli">Makni</Button>
                 </StackPanel>
-                <ListBox Name="lbDesno" />
+                <StackPanel>
+                    <TextBox Text="{Binding PretragaZanimanja, UpdateSourceTrigger=PropertyChanged}" />
+                    <ListBox Name="lbDesno" />
+                </StackPanel>
             </UniformGrid>
         </TabItem>
         <TabItem Header="Uhljebi">
