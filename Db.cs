@@ -34,5 +34,7 @@ namespace Bazzze
             modelBuilder.Entity<Osoba>().HasMany(o => o.Zanimanja)
                 .WithMany(z => z.Osobe);
         }
+
+        //testing, testing
     }
 }
